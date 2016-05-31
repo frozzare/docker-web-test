@@ -30,4 +30,5 @@ services:
       - VIRTUAL_HOST=${DOMAIN}
       - VIRTUAL_PORT=80
     depends_on:
+      - mysql
       - redis
