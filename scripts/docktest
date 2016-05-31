@@ -1,8 +1,12 @@
 #!/bin/bash
 
 NAME="docktest"
-GIT_URL="git@bitbucket.org:xxx/xxx.git"
-GIT_BRANCH="master"
+
+test -z "$1" && echo "$NAME" "<git-url> required." 1>&2 && exit 1
+test -z "$2" && echo "$NAME" "<git-branch> required." 1>&2 && exit 1
+
+GIT_URL=$1
+GIT_BRANCH=$2
 GIT_PATH=/tmp/$NAME/$GIT_BRANCH
 
 if [ -d $GIT_PATH ]; then
