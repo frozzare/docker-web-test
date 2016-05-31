@@ -19,6 +19,7 @@ services:
     expose:
       - 6379
   web:
+    container_name: ${DOMAIN}
     network_mode: test
     image: isotop/php:5.6-apache
     expose:
