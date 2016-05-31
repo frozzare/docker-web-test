@@ -1,7 +1,11 @@
 <?php
 
-echo 'Hello, world!';
-echo "\n";
-echo 'bf3fe522-5fb1-4652-899c-e44e8942104b';
+$redis = new Redis();
 
-phpinfo();
+$host = getenv( 'VIRTUAL_HOST' );
+$connected = $redis->connect( sprintf( 'redis.%s', $host ), 6379 );
+
+echo sprintf(
+	'<p style="font-size:45px; text-align: center; margin-top: 100px;">Redis is %s</p>',
+	$connected ? 'connected' : 'not connected'
+);
