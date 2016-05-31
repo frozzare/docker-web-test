@@ -1,0 +1,28 @@
+#!/bin/bash
+
+NAME="docktest"
+GIT_URL="git@bitbucket.org:xxx/xxx.git"
+GIT_BRANCH="master"
+GIT_PATH=/tmp/$NAME/$GIT_BRANCH
+
+if [ -d $GIT_PATH ]; then
+	cd $GIT_PATH
+	
+	# Try to kill the existing container.
+	docker-compose stop && docker-compose rm -f
+	
+	# Delete the path.	
+	cd /tmp && rm -rf $GIT_PATH
+fi 
+
+# Clone the project to git path and go to the folder.
+git clone $GIT_URL --branch $GIT_BRANCH $GIT_PATH
+cd $GIT_PATH
+
+# Install packages with composer if it exists.
+if which composer >/dev/null; then
+	composer install
+fi
+
+# Setup the docker image.
+docker-compose up -d
