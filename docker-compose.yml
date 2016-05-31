@@ -24,6 +24,7 @@ services:
     expose:
     - 80
     volumes:
+      - ${HOME}/.ssh:/root/.ssh
       - .:/var/www/html
     environment:
       - SITEPATH=/var/www/html/web
